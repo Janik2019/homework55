@@ -108,33 +108,33 @@ class ArticleUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('article_view', kwargs={'pk': self.object.pk})
 
-    # def update_tag(self):
-    #     tags = self.request.POST.get('tags')
-    #     #print(tags)
-    #     tags_list=tags.split(',')
-    #     #print(tags_list)
-    #     self.object.tags.clear()
-    #     for tag in tags_list:
-    #
-    #         get_tag, created_tag = Tag.objects.get_or_create(name=tag)
-    #         self.object.tags.add(get_tag)
-    #
-    # def get_form(self, form_class=None):
-    #     form = super().get_form(form_class=None)
-    #     query=self.object.tags.values('name')
-    #     res = ''
-    #     for tag in query:
-    #         res+=tag['name']+','
-    #     print(res)
-    #     print(query)
-    #
-    #     form.fields['tags'].initial = res.replace(' ', '').strip(',')
-    #     return form
-    #
-    # def form_valid(self, form):
-    #     self.object = form.save()
-    #     self.update_tag()
-    #     return redirect(self.get_success_url())
+    def update_tag(self):
+        tags = self.request.POST.get('tags')
+        #print(tags)
+        tags_list=tags.split(',')
+        #print(tags_list)
+        self.object.tags.clear()
+        for tag in tags_list:
+
+            get_tag, created_tag = Tag.objects.get_or_create(name=tag)
+            self.object.tags.add(get_tag)
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=None)
+        query=self.object.tags.values('name')
+        res = ''
+        for tag in query:
+            res+=tag['name']+','
+        print(res)
+        print(query)
+
+        form.fields['tags'].initial = res.replace(' ', '').strip(',')
+        return form
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.update_tag()
+        return redirect(self.get_success_url())
 
 
 
