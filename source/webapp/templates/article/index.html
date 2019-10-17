@@ -21,7 +21,7 @@
             <a href="{% url "article_delete" article.pk %}">Delete</a>
         </p>
         {% for tag in article.tags.all %}
-            <span>#{{ tag.name }}</span>
+            <a href="?search={{ tag.name }}">#{{ tag.name }}</a>
         {% endfor %}
 
         <hr/>

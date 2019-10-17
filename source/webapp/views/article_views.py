@@ -33,9 +33,6 @@ class IndexView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         if self.search_query:
-            # print(queryset.filter(  Q(title__icontains=self.search_query)
-            #     | Q(author__icontains=self.search_query)
-            #     | Q(tags__name__icontains=self.search_query)).values('pk').distinct())
             queryset = queryset.filter(
                 Q(title__icontains=self.search_query)
                 | Q(author__icontains=self.search_query)
