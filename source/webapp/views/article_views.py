@@ -1,11 +1,12 @@
 from django.db.models import Q
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
 from django.views.generic import ListView, DetailView, CreateView, \
     UpdateView, DeleteView
 
 from webapp.forms import ArticleForm, ArticleCommentForm, SimpleSearchForm
-from webapp.models import Article
+from webapp.models import Article, Tag
 from django.core.paginator import Paginator
 
 
@@ -32,10 +33,14 @@ class IndexView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         if self.search_query:
+            # print(queryset.filter(  Q(title__icontains=self.search_query)
+            #     | Q(author__icontains=self.search_query)
+            #     | Q(tags__name__icontains=self.search_query)).values('pk').distinct())
             queryset = queryset.filter(
                 Q(title__icontains=self.search_query)
                 | Q(author__icontains=self.search_query)
-            )
+                # | Q(tags__name__icontains=self.search_query)
+            ).distinct()
         return queryset
 
     def get_search_form(self):
@@ -77,6 +82,22 @@ class ArticleCreateView(CreateView):
     def get_success_url(self):
         return reverse('article_view', kwargs={'pk': self.object.pk})
 
+    def create_tag(self):
+        tags = self.request.POST.get('tags')
+        print(tags)
+        tags_list=tags.split(',')
+        print(tags_list)
+        for tag in tags_list:
+            get_tag, created_tag = Tag.objects.get_or_create(name=tag)
+            self.object.tags.add(get_tag)
+
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.create_tag()
+        return redirect(self.get_success_url())
+
+
 
 class ArticleUpdateView(UpdateView):
     model = Article
@@ -86,6 +107,35 @@ class ArticleUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('article_view', kwargs={'pk': self.object.pk})
+
+    # def update_tag(self):
+    #     tags = self.request.POST.get('tags')
+    #     #print(tags)
+    #     tags_list=tags.split(',')
+    #     #print(tags_list)
+    #     self.object.tags.clear()
+    #     for tag in tags_list:
+    #
+    #         get_tag, created_tag = Tag.objects.get_or_create(name=tag)
+    #         self.object.tags.add(get_tag)
+    #
+    # def get_form(self, form_class=None):
+    #     form = super().get_form(form_class=None)
+    #     query=self.object.tags.values('name')
+    #     res = ''
+    #     for tag in query:
+    #         res+=tag['name']+','
+    #     print(res)
+    #     print(query)
+    #
+    #     form.fields['tags'].initial = res.replace(' ', '').strip(',')
+    #     return form
+    #
+    # def form_valid(self, form):
+    #     self.object = form.save()
+    #     self.update_tag()
+    #     return redirect(self.get_success_url())
+
 
 
 class ArticleDeleteView(DeleteView):

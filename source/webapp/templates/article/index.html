@@ -20,6 +20,10 @@
             <a href="{% url 'article_update' article.pk %}">Edit</a>
             <a href="{% url "article_delete" article.pk %}">Delete</a>
         </p>
+{#        {% for tag in article.tags.all %}#}
+{#            <span>#{{ tag.name }}</span>#}
+{#        {% endfor %}#}
+
         <hr/>
     {% endfor %}
     {% if is_paginated %}
