@@ -7,7 +7,9 @@
     "text": "Article 1",
     "author": "Me",
     "created_at": "2019-09-03T14:17:12.139Z",
-    "updated_at": "2019-09-03T14:22:09.383Z"
+    "updated_at": "2019-09-03T14:22:09.383Z",
+    "category": null,
+    "tags": []
   }
 },
 {
@@ -18,7 +20,9 @@
     "text": "Another Article",
     "author": "Me",
     "created_at": "2019-09-03T14:06:09.002Z",
-    "updated_at": "2019-09-03T14:06:09.002Z"
+    "updated_at": "2019-09-03T14:06:09.002Z",
+    "category": null,
+    "tags": []
   }
 },
 {
@@ -29,7 +33,9 @@
     "text": "Article 3",
     "author": "He",
     "created_at": "2019-09-03T14:09:48.915Z",
-    "updated_at": "2019-09-03T14:09:48.915Z"
+    "updated_at": "2019-09-03T14:09:48.915Z",
+    "category": null,
+    "tags": []
   }
 },
 {
@@ -40,7 +46,52 @@
     "text": "Text",
     "author": "Author",
     "created_at": "2019-09-03T14:44:14.453Z",
-    "updated_at": "2019-09-03T14:44:14.453Z"
+    "updated_at": "2019-09-03T14:44:14.453Z",
+    "category": null,
+    "tags": []
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 5,
+  "fields": {
+    "title": "test",
+    "text": "test",
+    "author": "Unknown",
+    "created_at": "2019-10-17T10:48:19.149Z",
+    "updated_at": "2019-10-17T10:48:19.149Z",
+    "category": null,
+    "tags": []
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 6,
+  "fields": {
+    "title": "test",
+    "text": "test",
+    "author": "Unknown",
+    "created_at": "2019-10-17T10:49:21.490Z",
+    "updated_at": "2019-10-17T10:49:21.490Z",
+    "category": null,
+    "tags": []
+  }
+},
+{
+  "model": "webapp.article",
+  "pk": 7,
+  "fields": {
+    "title": "test",
+    "text": "test",
+    "author": "Unknown",
+    "created_at": "2019-10-17T10:50:26.347Z",
+    "updated_at": "2019-10-17T11:59:16.540Z",
+    "category": null,
+    "tags": [
+      3,
+      6,
+      7
+    ]
   }
 },
 {
@@ -88,11 +139,67 @@
   }
 },
 {
+  "model": "webapp.tag",
+  "pk": 1,
+  "fields": {
+    "name": "home",
+    "created_at": "2019-10-17T10:50:26.364Z"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 2,
+  "fields": {
+    "name": "people",
+    "created_at": "2019-10-17T10:50:26.387Z"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 3,
+  "fields": {
+    "name": "test",
+    "created_at": "2019-10-17T11:11:50.149Z"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 4,
+  "fields": {
+    "name": " shirt",
+    "created_at": "2019-10-17T11:29:08.480Z"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 5,
+  "fields": {
+    "name": " study",
+    "created_at": "2019-10-17T11:56:15.587Z"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 6,
+  "fields": {
+    "name": "study",
+    "created_at": "2019-10-17T11:59:16.576Z"
+  }
+},
+{
+  "model": "webapp.tag",
+  "pk": 7,
+  "fields": {
+    "name": " trade",
+    "created_at": "2019-10-17T11:59:16.597Z"
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$150000$rETxGUggP9m6$1+XpTSlJd0TUOGy4a5vygINOKbNt4VBXluA1qSdpgYY=",
-    "last_login": "2019-09-23T14:35:51.420Z",
+    "last_login": "2019-10-17T07:55:50.524Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
